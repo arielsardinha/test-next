@@ -12,7 +12,7 @@ export function Home(props: HomeProps) {
         <input {...register('title')} />
       </form>
 
-      <div>
+      <div className="todos">
         {todos.map(({ title, id, status }) => (
           <div key={id}>
             <p>{title}</p>
