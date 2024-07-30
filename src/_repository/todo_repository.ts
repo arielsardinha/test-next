@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
+import { DataSource } from '@/datasource/treinaweb_datasource';
+import * as repositoryServerActions from '@/_repository/actions';
 export interface Todo {
     readonly id: number;
     readonly title: string;
@@ -24,39 +25,29 @@ export interface TodoRepository {
 
 
 export class TodoRepositoryImpl implements TodoRepository {
-    private axiosInstance: AxiosInstance;
-
-    constructor() {
-        this.axiosInstance = axios.create({
-            baseURL: 'https://alunos.treinaweb.com.br/tw-todos/api/v1',
-        });
-    }
+    constructor(readonly dataSource: DataSource) { }
 
     async findAll(): Promise<Todo[]> {
-        const response = await this.axiosInstance.get<Todo[]>('/todos');
-        return response.data;
+        return repositoryServerActions.findAll({ getAll: this.dataSource.getAll });
     }
 
     async find(todoId: number): Promise<Todo> {
-        const response = await this.axiosInstance.get<Todo>(`/todos/${todoId}`);
-        return response.data;
+        return repositoryServerActions.find(todoId, { get: this.dataSource.get })
     }
 
     async create(createTodoData: CreateTodoData): Promise<Todo> {
-        const response = await this.axiosInstance.post<Todo>('/todos', createTodoData);
-        return response.data;
+        return repositoryServerActions.create(createTodoData, { post: this.dataSource.post });
     }
 
     async update(todo: UpdateTodoData): Promise<Todo> {
-        const response = await this.axiosInstance.put<Todo>(`/todos/${todo.id}`, todo);
-        return response.data;
+        return repositoryServerActions.update(todo, { put: this.dataSource.put });
     }
 
     async delete(todo: Todo): Promise<void> {
-        await this.axiosInstance.delete(`/todos/${todo.id}`);
+        repositoryServerActions.deleteTodo(todo, { delete_: this.dataSource.delete_ });
     }
 
     async finish(todo: Todo): Promise<void> {
-        await this.axiosInstance.post<Todo>(`/todos/${todo.id}/finish`);
+        repositoryServerActions.finish(todo, { post: this.dataSource.post });
     }
 }

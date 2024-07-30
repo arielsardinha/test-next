@@ -2,6 +2,7 @@
 import { useTodoController, UseTodoControllerParamns } from "@/app/_controller/todo_controller";
 import { TodoModel, TodosModel } from "@/app/_model/todo_model";
 import { TodoRepositoryImpl } from "@/_repository/todo_repository";
+import * as dataSource from "@/datasource/treinaweb_datasource";
 
 interface HomeProps extends UseTodoControllerParamns { }
 export function Home(props: HomeProps) {
@@ -30,6 +31,6 @@ export default function Page() {
   return <Home
     initialTodo={TodoModel.getInitialValue()}
     initialTodos={new TodosModel([])}
-    repository={new TodoRepositoryImpl()}
+    repository={new TodoRepositoryImpl(dataSource)}
   />
 }
