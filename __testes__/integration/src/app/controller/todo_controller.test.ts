@@ -1,6 +1,6 @@
 import { TodoRepository, TodoRepositoryImpl } from '@/_repository/todo_repository';
 import { useTodoController } from '@/app/_controller/todo_controller';
-import { TodoModel, TodosModel } from '@/app/_model/todo_model';
+import { TodoModel } from '@/app/_model/todo_model';
 import { DataSource } from '@/datasource/treinaweb_datasource';
 import { renderHook, waitFor } from '@testing-library/react';
 
@@ -39,13 +39,13 @@ describe("Deve testar o controller", () => {
         const { result } = renderHook(() => useTodoController(
             {
                 initialTodo: TodoModel.getInitialValue(),
-                initialTodos: new TodosModel([]),
+
                 repository: repository,
             }
         ));
 
         await waitFor(() => {
-            expect(result.current.todos.todos.length).toBe(1);
+            expect(result.current.todos.length).toBe(1);
         });
 
         // Verifica se o método getAll do mockDataSource foi chamado

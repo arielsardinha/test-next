@@ -1,0 +1,38 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100bh;
+    width: 300px;
+    margin: auto;
+}
+
+.Form {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ContentTodos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: start;
+}
+
+.TodoItem {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.TodoItem div {
+    display: flex;
+    gap: 5px;
+    flex-wrap: nowrap;
+}
