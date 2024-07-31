@@ -14,7 +14,7 @@ export function useTodoController({
     const [todos, setTodos] = useState<TodoModel[]>([]);
     const [isPending, startTransition] = useTransition();
 
-    const { register, handleSubmit } = useForm<NewTodo>({
+    const { register, handleSubmit, formState: { errors } } = useForm<NewTodo>({
         defaultValues: initialTodo,
         resolver: zodResolver(TodoModel.createSchema),
     });
@@ -50,6 +50,6 @@ export function useTodoController({
         submit,
         handleSubmit,
         isPending,
-        checkTodo
+        checkTodo, errors
     }
 }

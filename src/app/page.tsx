@@ -7,24 +7,27 @@ import Style from "./home.module.css"
 
 interface HomeProps extends UseTodoControllerParamns { }
 export function Home(props: HomeProps) {
-  const { handleSubmit, submit, register, todos, isPending, checkTodo } = useTodoController(props);
+  const { handleSubmit, submit, register, todos, isPending, checkTodo, errors } = useTodoController(props);
+
   return (
     <main className={Style.Container}>
       <form className={Style.Form} onSubmit={handleSubmit(submit)}>
         <input {...register('title')} />
         <input type="submit" value={"Salvar"} disabled={isPending} />
         {isPending && "salvando..."}
+        {errors.title?.message}
       </form>
 
       <div className={Style.ContentTodos}>
-        {todos.map((todo) => (
-          <div key={todo.id} className={Style.TodoItem}>
+        {todos.map((todo, i) => (
+          <div key={i} className={Style.TodoItem}>
             <div>
               <p>{todo.title}:</p>
-              <p>{todo.status}</p>
+              <p>{todo.status}</p>z
             </div>
-            {!todo.isDone && <input type="button" value="concluir tarefa" onClick={() => checkTodo(todo)} />}
-
+            {!todo.isDone && (
+              <input type="button" value="concluir tarefa" onClick={() => checkTodo(todo)} />
+            )}
           </div>
         ))}
       </div>
@@ -33,8 +36,10 @@ export function Home(props: HomeProps) {
 }
 
 export default function Page() {
-  return <Home
-    initialTodo={TodoModel.getInitialValue()}
-    repository={new TodoRepositoryImpl(dataSource)}
-  />
+  return (
+    <Home
+      initialTodo={TodoModel.getInitialValue()}
+      repository={new TodoRepositoryImpl(dataSource)}
+    />
+  );
 }

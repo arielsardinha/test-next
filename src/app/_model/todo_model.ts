@@ -27,7 +27,7 @@ export class TodoModel {
 
     static get createSchema() {
         return z.object({
-            title: z.string()
+            title: z.string().min(1, {message: 'titulo é obrigatório'})
         }) satisfies ZodSchema<NewTodo>
     }
 
