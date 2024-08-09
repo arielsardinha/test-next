@@ -4,9 +4,11 @@ import { TodoModel } from "@/app/_model/todo_model";
 import { TodoRepositoryImpl } from "@/_repository/todo_repository";
 import * as dataSource from "@/datasource/treinaweb_datasource";
 import Style from "./home.module.css"
+import { TodoList } from "@/_component/tela_teste";
 
 interface HomeProps extends UseTodoControllerParamns { }
 export function Home(props: HomeProps) {
+
   const { handleSubmit, submit, register, todos, isPending, checkTodo, errors } = useTodoController(props);
 
   return (

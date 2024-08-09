@@ -6,7 +6,7 @@ import * as dataSource from '@/datasource/treinaweb_datasource';
 import MockAdapter from 'axios-mock-adapter'
 
 
-describe("Deve testar o controller", () => {
+describe("Home", () => {
 
     let mockAdapter: MockAdapter;
     let todoRepository: TodoRepositoryImpl;
