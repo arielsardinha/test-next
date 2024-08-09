@@ -36,7 +36,7 @@ export interface DeleteDataSource {
 
 export type DataSource = GetAllDataSource & GetDataSource & PostDataSource & PutDataSource & DeleteDataSource;
 
-const axiosInstance: AxiosInstance = axios.create({
+export const axiosInstance: AxiosInstance = axios.create({
     baseURL: 'https://alunos.treinaweb.com.br/tw-todos/api/v1',
 });
 
